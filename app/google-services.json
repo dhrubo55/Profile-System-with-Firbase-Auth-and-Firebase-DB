@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "990268233057",
+    "firebase_url": "https://routemaster-3f168.firebaseio.com",
+    "project_id": "routemaster-3f168",
+    "storage_bucket": "routemaster-3f168.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:990268233057:android:bf0af7a8be899b78",
+        "android_client_info": {
+          "package_name": "com.example.dhruboandroid.routemaster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "990268233057-cjjhn499vlsvo089b6kavn7v9rqj4cd3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dhruboandroid.routemaster",
+            "certificate_hash": "87835202b0f2c2822d0039d4f38aadf8e7c32bab"
+          }
+        },
+        {
+          "client_id": "990268233057-m0b8q379vd068m3vee14h049t98p0p8t.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "990268233057-m0b8q379vd068m3vee14h049t98p0p8t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxsvm1xScKRlpqNm8gT-eBH1DGMvTR6c4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "990268233057-m0b8q379vd068m3vee14h049t98p0p8t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
