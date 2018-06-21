@@ -10,6 +10,25 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="305dp">
+        <Button
+            android:id="@+id/profile_edit_button"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:text="Edit"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/my_button_border"
+            />
+
+        <Button
+            android:id="@+id/profile_save_button"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:text="Save"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/my_button_border"
+            android:visibility="invisible"
+            />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -17,11 +36,13 @@
             android:background="@drawable/gradientbackground"
             android:orientation="vertical">
 
+
+
             <ImageView
-                android:layout_marginTop="45dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="45dp"
                 android:src="@drawable/common_full_open_on_phone" />
 
             <TextView
@@ -40,86 +61,88 @@
             android:layout_width="350dp"
             android:layout_height="120dp"
             android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
             android:layout_marginTop="202dp"
-            app:cardCornerRadius="20dp"
-            android:layout_marginBottom="5dp">
+            app:cardCornerRadius="20dp">
 
             <LinearLayout
-                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
                 android:background="#FFF"
-                >
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:layout_gravity="center">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Photos"
                         android:textSize="20sp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="125"
-                        android:textStyle="bold"
-                        android:textSize="20sp"
                         android:paddingTop="10dp"
-                        android:textColor="@color/startBlue"/>
+                        android:text="125"
+                        android:textColor="@color/startBlue"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:layout_gravity="center">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Follwer"
                         android:textSize="20sp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="125"
-                        android:textStyle="bold"
-                        android:textSize="20sp"
                         android:paddingTop="10dp"
-                        android:textColor="@color/startBlue"/>
+                        android:text="125"
+                        android:textColor="@color/startBlue"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
 
-                    android:layout_gravity="center">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Following"
                         android:textSize="20sp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="125"
-                        android:textStyle="bold"
-                        android:textSize="20sp"
                         android:paddingTop="10dp"
-                        android:textColor="@color/startBlue"/>
+                        android:text="125"
+                        android:textColor="@color/startBlue"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
 
