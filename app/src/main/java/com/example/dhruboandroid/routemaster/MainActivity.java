@@ -1,7 +1,10 @@
 package com.example.dhruboandroid.routemaster;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,6 +28,13 @@ public class MainActivity extends AppCompatActivity
 
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authListener;
+   // private ImageView profile_imageView;
+   // private Bitmap currentImage;
+
+
+    //Todo pick image from gallery and place it on the imagview
+    //Todo make profile page editable
+    //todo saving and fetching data from the firebase database
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +79,38 @@ public class MainActivity extends AppCompatActivity
             }
         };
 
-    }
+
+       // profile_imageView = findViewById(R.id.imageView);
+
+      //  profile_imageView.setOnClickListener(new View.OnClickListener() {
+       //     @Override
+        //    public void onClick(View v) {
+       //         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        //        photoPickerIntent.setType("image/*");
+         //       startActivityForResult(photoPickerIntent, 1);
+            }
+      //  });
+
+   // }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (resultCode == RESULT_OK) {
+//            Uri photoUri = data.getData();
+//            if (photoUri != null) {
+//                try {
+//                    currentImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoUri);
+//                    profile_imageView.setImageBitmap(currentImage);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//    }
+
+
 
     @Override
     protected void onStart() {
@@ -145,6 +187,12 @@ public class MainActivity extends AppCompatActivity
         if (authListener != null) {
             firebaseAuth.removeAuthStateListener(authListener);
         }
+
+//        if (currentImage != null) {
+//            currentImage.recycle();
+//            currentImage = null;
+//            System.gc();
+//        }
     }
 
 
