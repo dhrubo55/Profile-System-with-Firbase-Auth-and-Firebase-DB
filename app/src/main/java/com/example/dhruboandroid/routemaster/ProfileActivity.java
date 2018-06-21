@@ -22,7 +22,17 @@ public class ProfileActivity extends AppCompatActivity {
              @Override
              public void onClick(View v) {
                  profile_save.setVisibility(View.VISIBLE);
+                 profile_edit.setVisibility(View.INVISIBLE);
 
+             }
+         });
+
+
+         profile_save.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 profile_edit.setVisibility(View.VISIBLE);
+                 profile_save.setVisibility(View.INVISIBLE);
              }
          });
     }
