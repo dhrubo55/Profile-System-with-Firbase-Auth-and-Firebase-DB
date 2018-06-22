@@ -45,15 +45,16 @@
                 android:layout_marginTop="45dp"
                 android:src="@drawable/common_full_open_on_phone" />
 
-            <TextView
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:text="Atiar Bhai"
+                android:hint="Enter Name"
                 android:textColor="#fff"
                 android:textSize="21sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:id="@+id/profile_name"/>
 
         </LinearLayout>
         <!-- Card view Inserted to show stats-->
@@ -172,9 +173,10 @@
                 android:id="@+id/profile_email"
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
+                android:hint="Enter Email"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
-                android:text="atiar@gmail.com"
+
 
 
 
@@ -198,8 +200,9 @@
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:hint="Enter Social Media"
                 android:paddingLeft="20dp"
-                android:text="/@atiar"
+
 
 
 
@@ -223,8 +226,9 @@
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:hint="Enter Group"
                 android:paddingLeft="20dp"
-                android:text="add to groups"
+
 
 
 
@@ -249,7 +253,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
-                android:text="01xxxxxxxxxx"
+                android:hint="Enter Number"
 
 
                 />
