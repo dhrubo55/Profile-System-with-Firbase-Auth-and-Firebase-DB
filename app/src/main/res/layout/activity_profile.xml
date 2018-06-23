@@ -37,13 +37,13 @@
             android:orientation="vertical">
 
 
-
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/profile_imageView"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="45dp"
-                android:src="@drawable/common_full_open_on_phone" />
+                android:onClick="imageViewClick" />
 
             <EditText
                 android:layout_width="wrap_content"

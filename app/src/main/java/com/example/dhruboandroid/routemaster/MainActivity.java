@@ -21,6 +21,7 @@ import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -28,8 +29,8 @@ public class MainActivity extends AppCompatActivity
 
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authListener;
-   // private ImageView profile_imageView;
-   // private Bitmap currentImage;
+//    private ImageView profile_imageView;
+//    private Bitmap currentImage;
 
 
     //Todo pick image from gallery and place it on the imagview
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity
 
         //get firebase auth instance
         firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         //get current user
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         authListener = new FirebaseAuth.AuthStateListener() {
@@ -80,35 +82,19 @@ public class MainActivity extends AppCompatActivity
         };
 
 
-       // profile_imageView = findViewById(R.id.imageView);
-
-      //  profile_imageView.setOnClickListener(new View.OnClickListener() {
-       //     @Override
-        //    public void onClick(View v) {
-       //         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-        //        photoPickerIntent.setType("image/*");
-         //       startActivityForResult(photoPickerIntent, 1);
-            }
-      //  });
-
-   // }
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
+//        profile_imageView = findViewById(R.id.imageView);
 //
-//        if (resultCode == RESULT_OK) {
-//            Uri photoUri = data.getData();
-//            if (photoUri != null) {
-//                try {
-//                    currentImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoUri);
-//                    profile_imageView.setImageBitmap(currentImage);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
+//       profile_imageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//               Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+//                photoPickerIntent.setType("image/*");
+//                startActivityForResult(photoPickerIntent, 1);
 //            }
-//        }
-//    }
+//       });
+//
+    }
+//
 
 
 
@@ -191,9 +177,8 @@ public class MainActivity extends AppCompatActivity
 //        if (currentImage != null) {
 //            currentImage.recycle();
 //            currentImage = null;
-//            System.gc();
-//        }
+        System.gc();
     }
-
-
 }
+
+
