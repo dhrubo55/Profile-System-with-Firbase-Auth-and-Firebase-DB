@@ -73,7 +73,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-
+//      Declaring custom context
         mContext = getApplicationContext();
         // initailizing profile attirbutes
         profile_name = findViewById(R.id.profile_name);
@@ -97,6 +97,8 @@ public class ProfileActivity extends AppCompatActivity {
         } catch (NullPointerException e) {
             Toast.makeText(this, "User Id not available", Toast.LENGTH_SHORT).show();
         }
+
+        // Firebase database initialized
         firedbinstance = FirebaseDatabase.getInstance();
         firedbReference = firedbinstance.getReference("users");
 
@@ -109,6 +111,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         }
 
+
+        // Setting all the GUI properties enabled to false
             profile_name.setEnabled(false);
             profile_email.setEnabled(false);
             profile_social.setEnabled(false);
@@ -116,10 +120,12 @@ public class ProfileActivity extends AppCompatActivity {
             profile_number.setEnabled(false);
             profile_image.setImageResource(R.drawable.ic_cameraa);
 
-
+       // event handling of button: edit
             profile_edit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    // enabling the GUI properties
                     profile_save.setVisibility(View.VISIBLE);
                     profile_edit.setVisibility(View.INVISIBLE);
                     profile_email.setEnabled(true);
@@ -130,6 +136,8 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             });
 
+
+        // event handling of button: save
             profile_save.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -141,13 +149,13 @@ public class ProfileActivity extends AppCompatActivity {
                     String group = profile_group.getText().toString().trim();
                     String number = profile_number.getText().toString().trim();
 
-
+        // calling create user if the user have completed the registration process else update user information
                     if (TextUtils.isEmpty(usrid)) {
                         createUser(name, email, usrid, social, group, number);
                     } else {
                         updateUser(name, email, usrid, social, group, number);
                     }
-
+        // save buttion
                     profile_edit.setVisibility(View.VISIBLE);
                     profile_save.setVisibility(View.INVISIBLE);
                     profile_email.setEnabled(false);
@@ -164,12 +172,12 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
 
-
+   // clickable imageview for taking pictures from the gallery and  setting it on the image view
     public void imageViewClick(View v) {
         Intent imageIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(imageIntent, SELECTED_PIC);
     }
-
+    // Image view gallery pic choosing
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -200,16 +208,19 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
+    // create user method for creating new user in the app and Firebase
     private void createUser(String n, String e, String id, String s, String g, String num){
         if(id==null){
             //
         }
+        // initializing the data model class of the userDataModel
         userDataModelClass user = new userDataModelClass(n,e,id,s,g,num);
         firedbReference.child(id).setValue(user);
 
         addUserChangeLisener(id);
     }
 
+    // user change listener for updating user information in the current user  (Without Login Out)
     private void addUserChangeLisener(String i) {
         firedbReference.child(i).addValueEventListener(new ValueEventListener() {
             @Override
@@ -238,6 +249,8 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
+    //update user information by calling this method.
+
     private void updateUser(String n, String e, String id, String s, String g, String number){
         if(!TextUtils.isEmpty(n)){
 
@@ -265,10 +278,13 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+
+    // Reading user data using this method and storing the image of user profile in shared preference.
+
     private void readData(String userId) throws NullPointerException{
 
 
-
+    // converting the iomage from string to image
         final Bitmap bitmapImage = stringToImage(SharedPrefarences.getPreference(getContext(),usrID));
 
 
@@ -277,7 +293,8 @@ public class ProfileActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 userDataModelClass user   = dataSnapshot.getValue(userDataModelClass.class);
-
+                // fetching all the data
+                // from firebase servers and placing them in UI
                 if (user != null){
 
 
@@ -308,7 +325,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
-
+    // custom method for converting the image to string
     private String imageToString(Bitmap bitmap){
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -318,7 +335,7 @@ public class ProfileActivity extends AppCompatActivity {
         return Base64.encodeToString(imgbyte,Base64.DEFAULT);
     }
 
-
+    // custom method for converting the string to image.
     private Bitmap stringToImage(String encodedImage){
 
         byte[] decodedByte = Base64.decode(encodedImage, 0);
@@ -327,7 +344,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-
+   // server side code for image storing on the custom servers of routemasterbd
 //    private void uploadImg(String imageName, Bitmap b){
 //        String image_data = imageToString(b);
 //        String image_name = imageName;

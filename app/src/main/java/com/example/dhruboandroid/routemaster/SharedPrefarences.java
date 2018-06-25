@@ -14,11 +14,11 @@ import java.io.ByteArrayOutputStream;
 
 public class SharedPrefarences {
 
+    // Assigning the image of this camera as the default output of the sharedpreference if the firebase auth key dont have an entry in the shared preference
     Drawable drawable =ProfileActivity.getContext().getResources().getDrawable(R.drawable.ic_cameraa);
     private static Bitmap bitmap = BitmapFactory.decodeResource(ProfileActivity.getContext().getResources(),R.drawable.ic_cameraa);
 
-
-
+    // custom method for encoding the image to base64 string
     public static String encodeToBase64(Bitmap image, Bitmap.CompressFormat compressFormat, int quality)
     {
         ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();

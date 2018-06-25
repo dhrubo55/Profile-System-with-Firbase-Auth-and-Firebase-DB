@@ -177,6 +177,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
 
+                android:inputType="textEmailAddress"
 
 
 
@@ -248,6 +249,7 @@
                 android:src="@drawable/ic_phone_android_black_24dp"
                 />
             <EditText
+                android:inputType="number"
                 android:id="@+id/profile_number"
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
