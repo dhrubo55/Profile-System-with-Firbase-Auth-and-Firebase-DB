@@ -18,7 +18,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
@@ -26,8 +31,10 @@ import com.google.firebase.database.FirebaseDatabase;
 // Activity with nav drawer for the users
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private static final String TAG = "ProfileActivity Atiar= ";
 
 
+    private GoogleApiClient mGoogleSignInClient;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authListener;
 //    private ImageView profile_imageView;
@@ -167,6 +174,7 @@ public class MainActivity extends AppCompatActivity
     //sign out method
     public void signOut() {
         firebaseAuth.signOut();
+        UserSignOutFunction();
     }
 
     @Override
@@ -182,6 +190,30 @@ public class MainActivity extends AppCompatActivity
 //            currentImage.recycle();
 //            currentImage = null;
         System.gc();
+    }
+
+
+
+    public void UserSignOutFunction() {
+
+        // Sing Out the User.
+        firebaseAuth.signOut();
+
+        Auth.GoogleSignInApi.signOut(mGoogleSignInClient).setResultCallback(
+                new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(@NonNull Status status) {
+
+                        // Write down your any code here which you want to execute After Sign Out.
+
+                        // Printing Logout toast message on screen.
+                        Toast.makeText(MainActivity.this, "Google Logout successful",Toast.LENGTH_LONG).show();
+
+
+                    }
+                });
+
+
     }
 }
 
