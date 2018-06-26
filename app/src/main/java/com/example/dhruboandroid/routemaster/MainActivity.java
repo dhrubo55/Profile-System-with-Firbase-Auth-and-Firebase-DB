@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity
     //sign out method
     public void signOut() {
         firebaseAuth.signOut();
-        UserSignOutFunction();
+        //UserSignOutFunction();
     }
 
     @Override
