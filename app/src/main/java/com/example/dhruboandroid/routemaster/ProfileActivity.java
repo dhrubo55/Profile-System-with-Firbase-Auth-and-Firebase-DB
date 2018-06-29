@@ -32,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.apache.http.params.HttpParams;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
@@ -60,6 +61,7 @@ public class ProfileActivity extends AppCompatActivity {
     private EditText profile_group;
     private EditText profile_number;
     private ImageView profile_image;
+    private Bitmap bitmap;
 
     private static Context mContext;
     private String usrID;
@@ -181,32 +183,49 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch(requestCode){
-            case SELECTED_PIC:
-                if(resultCode == RESULT_OK){
-                    Uri uri = data.getData();
-                    String[] projection = {MediaStore.Images.Media.DATA};
-                    Cursor cursor = getContentResolver().query(uri,projection,null,null,null);
-                    cursor.moveToFirst();
-                    int columnIndex = cursor.getColumnIndex(projection[0]);
-                    String filePath = cursor.getString(columnIndex);
-                    cursor.close();
 
-                    Bitmap bitmap = BitmapFactory.decodeFile(filePath);
-                    Drawable drwable = new BitmapDrawable(getResources(),bitmap);
-                    profile_image.setImageDrawable(drwable);
+        if (requestCode == SELECTED_PIC && resultCode == RESULT_OK && data != null && data.getData() != null) {
+
+            Uri uri = data.getData();
+
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                // Log.d(TAG, String.valueOf(bitmap));
+                profile_image.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+//        switch(requestCode){
+//            case SELECTED_PIC:
+//                if(resultCode == RESULT_OK){
+//                    Uri uri = data.getData();
+//                    String[] projection = {MediaStore.Images.Media.DATA};
+//                    Cursor cursor = getContentResolver().query(uri,projection,null,null,null);
+//                    cursor.moveToFirst();
+//                    int size = projection.length;
+//                    Log.e(TAG,size+"");
+//                    int columnIndex1 = cursor.getColumnIndex(projection[0]);
+//                    String filePath = cursor.getString(columnIndex1);
+//
+//
+//                    cursor.close();
+//
+//                    Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+//                    Drawable drwable = new BitmapDrawable(getResources(),bitmap);
+//                    profile_image.setImageDrawable(drwable);
 
 
                    // uploadImg(profile_name.getText().toString().trim(),bitmap);
                     String encodedImage = imageToString(bitmap);
                     SharedPrefarences.setPreference(getContext(),FirebaseAuth.getInstance().getCurrentUser().getUid(),encodedImage);
                 }
-                break;
+ //               break;
 
-            default:
-                break;
-        }
-    }
+       //     default:
+     //           break;
+   //     }
+
 
     // create user method for creating new user in the app and Firebase
     private void createUser(String n, String e, String id, String s, String g, String num){
@@ -326,10 +345,10 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     // custom method for converting the image to string
-    private String imageToString(Bitmap bitmap){
+    private String imageToString(Bitmap bitmaps){
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+        bitmaps.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
 
         byte[] imgbyte = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(imgbyte,Base64.DEFAULT);
