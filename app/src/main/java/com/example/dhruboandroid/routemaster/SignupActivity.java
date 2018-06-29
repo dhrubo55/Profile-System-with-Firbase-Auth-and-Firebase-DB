@@ -111,7 +111,17 @@ public class SignupActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
 
+                                if (task.isSuccessful()){
+                                    Log.d(TAG,task.getResult().getUser().getUid());
+                                    Toast.makeText(SignupActivity.this, "User ID = "+task.getResult().getUser().getUid(), Toast.LENGTH_LONG).show();
+                                }
+                                if (task.isComplete()){
+                                    Log.d(TAG,task.getResult().getUser().getUid());
+                                    Toast.makeText(SignupActivity.this, "User ID = "+task.getResult().getUser().getUid(), Toast.LENGTH_LONG).show();
+                                }
+
                                 Toast.makeText(SignupActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+
                                 progressBar.setVisibility(View.GONE);
                                 // If sign in fails, display a message to the user. If sign in succeeds
                                 // the auth state listener will be notified and logic to handle the
@@ -120,21 +130,27 @@ public class SignupActivity extends AppCompatActivity {
                                     Toast.makeText(SignupActivity.this, "Authentication failed." + task.getException(),
                                             Toast.LENGTH_SHORT).show();
                                 }
+
+
                             }
                         });
 
 
-                FirebaseUser user = auth.getCurrentUser();
-                id = user.getUid();
-                createUser(name,email,id,"","","");
+
+/*                SharedPrefarences.setPreference(getApplicationContext(),"Name",name);
+                SharedPrefarences.setPreference(getApplicationContext(),"Email",email);*/
+//
+//                FirebaseUser user = auth.getCurrentUser();
+//                id = user.getUid();
+//                createUser(name,email,id,"","","");
+//
+//
+//
+//
                 startActivity(new Intent(SignupActivity.this, MainActivity.class));
 
-
-
-
                 finish();
-
-            }
+           }
         });
     }
 
