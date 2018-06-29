@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,13 +15,22 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignupActivity extends AppCompatActivity {
 
-    private EditText inputEmail, inputPassword;
+    private EditText inputEmail, inputPassword, inputName, inputConfirmPassword;
     private Button btnSignIn, btnSignUp, btnResetPassword;
     private ProgressBar progressBar;
     private FirebaseAuth auth;
+
+    private static final String TAG = "ProfileActivity Atiar= ";
+
+    private FirebaseDatabase firedbinstance;
+    private DatabaseReference firedbReference;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +39,8 @@ public class SignupActivity extends AppCompatActivity {
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
+        firedbinstance = FirebaseDatabase.getInstance();
+        firedbReference = firedbinstance.getReference("users");
 
         btnSignIn =  findViewById(R.id.sign_in_button);
         btnSignUp =  findViewById(R.id.sign_up_button);
@@ -36,6 +48,8 @@ public class SignupActivity extends AppCompatActivity {
         inputPassword = findViewById(R.id.password);
         progressBar = findViewById(R.id.progressBar);
         btnResetPassword = findViewById(R.id.btn_reset_password);
+        inputName = findViewById(R.id.name);
+        inputConfirmPassword = findViewById(R.id.confirm_pass);
 
         btnResetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +72,16 @@ public class SignupActivity extends AppCompatActivity {
 
                 String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
+                String name = inputName.getText().toString().trim();
+                String confirmPassword = inputConfirmPassword.getText().toString().trim();
+
+
+                if(TextUtils.isEmpty(name)){
+                    Toast.makeText(getApplicationContext(), "Enter name!", Toast.LENGTH_SHORT).show();
+                }
+
+                if(TextUtils.isEmpty(confirmPassword)){
+                }
 
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
@@ -74,12 +98,19 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
+
+                if (!password.equals(confirmPassword)) {
+                    Toast.makeText(getApplicationContext(), "Password dont match", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 progressBar.setVisibility(View.VISIBLE);
                 //create user
                 auth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
+
                                 Toast.makeText(SignupActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
                                 progressBar.setVisibility(View.GONE);
                                 // If sign in fails, display a message to the user. If sign in succeeds
@@ -88,12 +119,20 @@ public class SignupActivity extends AppCompatActivity {
                                 if (!task.isSuccessful()) {
                                     Toast.makeText(SignupActivity.this, "Authentication failed." + task.getException(),
                                             Toast.LENGTH_SHORT).show();
-                                } else {
-                                    startActivity(new Intent(SignupActivity.this, MainActivity.class));
-                                    finish();
                                 }
                             }
                         });
+
+
+                FirebaseUser user = auth.getCurrentUser();
+                id = user.getUid();
+                createUser(name,email,id,"","","");
+                startActivity(new Intent(SignupActivity.this, MainActivity.class));
+
+
+
+
+                finish();
 
             }
         });
@@ -103,5 +142,16 @@ public class SignupActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         progressBar.setVisibility(View.GONE);
+    }
+
+
+    private void createUser(String n, String e, String id, String s, String g, String num){
+        if(id==null){
+            //
+        }
+        // initializing the data model class of the userDataModel
+        userDataModelClass user = new userDataModelClass(n,e,id,s,g,num);
+        firedbReference.child(id).setValue(user);
+
     }
 }

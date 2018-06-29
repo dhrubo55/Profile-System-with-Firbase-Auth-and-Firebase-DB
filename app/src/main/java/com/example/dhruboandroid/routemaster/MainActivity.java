@@ -8,6 +8,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -34,7 +36,14 @@ public class MainActivity extends AppCompatActivity
     private static final String TAG = "ProfileActivity Atiar= ";
 
 
+
     private GoogleApiClient mGoogleSignInClient;
+
+    private TextView nav_name;
+    private TextView nav_email;
+    private ImageView imageView;
+    public String name;
+    public String email;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authListener;
 //    private ImageView profile_imageView;
@@ -50,6 +59,19 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        nav_email = findViewById(R.id.nav_Email);
+        nav_name = findViewById(R.id.nav_Name);
+
+
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+            } else {
+                name= extras.getString("Name");
+                email = extras.getString("Email");
+                Log.e(TAG,name);
+            }
+        }
         //setSupportActionBar(toolbar);
         //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
@@ -153,6 +175,14 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
+        }
+        else if(id==R.id.nav_Name){
+            nav_name.setText(name);
+
+        } else if(id==R.id.nav_Email){
+            nav_email.setText(email);
+        } else if(id==R.id.imageView){
+
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
