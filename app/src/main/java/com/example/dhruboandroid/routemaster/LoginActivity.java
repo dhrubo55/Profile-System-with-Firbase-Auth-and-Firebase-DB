@@ -221,8 +221,11 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.e(TAG,"Login working");
                             Log.e(TAG,firebaseUser.getEmail());
+                            Log.e(TAG,firebaseUser.getDisplayName());
 
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                            intent.putExtra("Name",firebaseUser.getDisplayName());
+//                            intent.putExtra("Email",firebaseUser.getEmail());
                             startActivity(intent);
                             finish();
                            // Log.e(TAG, "Login not working");

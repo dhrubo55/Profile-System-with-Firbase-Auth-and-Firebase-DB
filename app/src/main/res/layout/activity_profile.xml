@@ -47,6 +47,7 @@
                 android:layout_height="80dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="45dp"
+                android:background="@drawable/ic_cameraa"
                 android:onClick="imageViewClick" />
 
             <EditText
