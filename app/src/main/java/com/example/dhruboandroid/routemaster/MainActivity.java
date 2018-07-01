@@ -62,16 +62,16 @@ public class MainActivity extends AppCompatActivity
         nav_email = findViewById(R.id.nav_Email);
         nav_name = findViewById(R.id.nav_Name);
 
-
-        if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-            } else {
-                name= extras.getString("Name");
-                email = extras.getString("Email");
-                Log.e(TAG,name);
-            }
-        }
+//
+//        if (savedInstanceState == null) {
+//            Bundle extras = getIntent().getExtras();
+//            if(extras == null) {
+//            } else {
+//                name= extras.getString("Name");
+//                email = extras.getString("Email");
+//                Log.e(TAG,name);
+//            }
+//        }
         //setSupportActionBar(toolbar);
         //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 

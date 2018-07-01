@@ -13,7 +13,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="305dp">
+        android:layout_height="270dp">
         <Button
             android:id="@+id/profile_edit_button"
             android:layout_width="80dp"
@@ -162,7 +162,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center"
-        android:layout_marginTop="45dp">
+        android:layout_marginTop="10dp">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -268,5 +268,11 @@
         </LinearLayout>
     </LinearLayout>
 
+    <Button
+        android:id="@+id/profile_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Home"
+        android:background="@drawable/my_button_border"/>
 </LinearLayout>
 </ScrollView>

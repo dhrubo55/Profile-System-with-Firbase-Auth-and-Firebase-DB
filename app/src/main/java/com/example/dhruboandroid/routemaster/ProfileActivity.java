@@ -63,6 +63,9 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageView profile_image;
     private Bitmap bitmap;
 
+
+    private String name;
+
     private static Context mContext;
     private String usrID;
 
@@ -77,6 +80,9 @@ public class ProfileActivity extends AppCompatActivity {
         //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 //      Declaring custom context
         mContext = getApplicationContext();
+
+        name = getIntent().getStringExtra("Name");
+
         // initailizing profile attirbutes
         profile_name = findViewById(R.id.profile_name);
         profile_email = findViewById(R.id.profile_email);
@@ -91,6 +97,10 @@ public class ProfileActivity extends AppCompatActivity {
 
         //initializing firebaseauth and firebasedatabasee
         firebaseAuth = FirebaseAuth.getInstance();
+
+        profile_email.setText(firebaseAuth.getCurrentUser().getEmail());
+        profile_name.setText(name);
+
         try {
             usrID = firebaseAuth.getCurrentUser().getUid();
             Log.e(TAG, usrID);
@@ -121,6 +131,7 @@ public class ProfileActivity extends AppCompatActivity {
             profile_group.setEnabled(false);
             profile_number.setEnabled(false);
             profile_image.setImageResource(R.drawable.ic_cameraa);
+            profile_image.setEnabled(false);
 
        // event handling of button: edit
             profile_edit.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +146,7 @@ public class ProfileActivity extends AppCompatActivity {
                     profile_group.setEnabled(true);
                     profile_number.setEnabled(true);
                     profile_name.setEnabled(true);
+                    profile_image.setEnabled(true);
                 }
             });
 
@@ -144,7 +156,7 @@ public class ProfileActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    String name = profile_name.getText().toString().trim();
+                    //String name1 = name;
                     String email = profile_email.getText().toString().trim();
                     String usrid = usrID;
                     String social = profile_social.getText().toString().trim();
@@ -153,9 +165,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         // calling create user if the user have completed the registration process else update user information
                     if (TextUtils.isEmpty(usrid)) {
-                        createUser(name, email, usrid, social, group, number);
+                        createUser(profile_name.getText().toString().trim(), email, usrid, social, group, number);
                     } else {
-                        updateUser(name, email, usrid, social, group, number);
+                        updateUser(profile_name.getText().toString().trim(), email, usrid, social, group, number);
                     }
         // save buttion
                     profile_edit.setVisibility(View.VISIBLE);

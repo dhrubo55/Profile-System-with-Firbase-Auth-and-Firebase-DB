@@ -28,8 +28,8 @@ public class SignupActivity extends AppCompatActivity {
 
     private static final String TAG = "ProfileActivity Atiar= ";
 
-    private FirebaseDatabase firedbinstance;
-    private DatabaseReference firedbReference;
+   // private FirebaseDatabase firedbinstance;
+   // private DatabaseReference firedbReference;
     private String id;
 
     @Override
@@ -39,8 +39,8 @@ public class SignupActivity extends AppCompatActivity {
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
-        firedbinstance = FirebaseDatabase.getInstance();
-        firedbReference = firedbinstance.getReference("users");
+        //firedbinstance = FirebaseDatabase.getInstance();
+        //firedbReference = firedbinstance.getReference("users");
 
         btnSignIn =  findViewById(R.id.sign_in_button);
         btnSignUp =  findViewById(R.id.sign_up_button);
@@ -70,9 +70,9 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String email = inputEmail.getText().toString().trim();
+              final  String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
-                String name = inputName.getText().toString().trim();
+              final  String name = inputName.getText().toString().trim();
                 String confirmPassword = inputConfirmPassword.getText().toString().trim();
 
 
@@ -129,6 +129,12 @@ public class SignupActivity extends AppCompatActivity {
                                 if (!task.isSuccessful()) {
                                     Toast.makeText(SignupActivity.this, "Authentication failed." + task.getException(),
                                             Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Intent intent = new Intent(SignupActivity.this, ProfileActivity.class);
+                                    //intent.putExtra("Email",email);
+                                    intent.putExtra("Name",name);
+                                    startActivity(intent);
+                                    finish();
                                 }
 
 
@@ -145,11 +151,7 @@ public class SignupActivity extends AppCompatActivity {
 //                createUser(name,email,id,"","","");
 //
 //
-//
-//
-                startActivity(new Intent(SignupActivity.this, MainActivity.class));
 
-                finish();
            }
         });
     }
@@ -158,16 +160,5 @@ public class SignupActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         progressBar.setVisibility(View.GONE);
-    }
-
-
-    private void createUser(String n, String e, String id, String s, String g, String num){
-        if(id==null){
-            //
-        }
-        // initializing the data model class of the userDataModel
-        userDataModelClass user = new userDataModelClass(n,e,id,s,g,num);
-        firedbReference.child(id).setValue(user);
-
     }
 }
