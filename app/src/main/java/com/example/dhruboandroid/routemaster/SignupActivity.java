@@ -28,8 +28,8 @@ public class SignupActivity extends AppCompatActivity {
 
     private static final String TAG = "ProfileActivity Atiar= ";
 
-   // private FirebaseDatabase firedbinstance;
-   // private DatabaseReference firedbReference;
+    // private FirebaseDatabase firedbinstance;
+    // private DatabaseReference firedbReference;
     private String id;
 
     @Override
@@ -70,9 +70,9 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-              final  String email = inputEmail.getText().toString().trim();
+                final  String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
-              final  String name = inputName.getText().toString().trim();
+                final  String name = inputName.getText().toString().trim();
                 String confirmPassword = inputConfirmPassword.getText().toString().trim();
 
 
@@ -130,6 +130,7 @@ public class SignupActivity extends AppCompatActivity {
                                     Toast.makeText(SignupActivity.this, "Authentication failed." + task.getException(),
                                             Toast.LENGTH_SHORT).show();
                                 }else{
+                                    SharedPrefarences.setPreference(ProfileActivity.getContext(),"name",name);
                                     Intent intent = new Intent(SignupActivity.this, ProfileActivity.class);
                                     //intent.putExtra("Email",email);
                                     intent.putExtra("Name",name);
@@ -152,7 +153,7 @@ public class SignupActivity extends AppCompatActivity {
 //
 //
 
-           }
+            }
         });
     }
 
