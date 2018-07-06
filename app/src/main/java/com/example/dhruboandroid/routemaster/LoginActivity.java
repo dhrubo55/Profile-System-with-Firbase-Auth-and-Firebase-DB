@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_new_login);
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -56,7 +57,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
         // set the view now
-        setContentView(R.layout.activity_login);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -73,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         // signup if new user
+
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

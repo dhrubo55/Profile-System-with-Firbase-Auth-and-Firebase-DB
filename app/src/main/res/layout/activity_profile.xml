@@ -41,13 +41,15 @@
             android:orientation="vertical">
 
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_imageView"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="45dp"
                 android:background="@drawable/ic_cameraa"
+                app:civ_border_color="@color/startBlue"
+                app:civ_border_width="2dp"
                 android:onClick="imageViewClick" />
 
             <EditText

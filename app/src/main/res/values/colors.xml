@@ -20,4 +20,6 @@
     <color name="startBlue">#38a679</color>
     <color name="grayLight">#fafafa</color>
     <color name="endBlue">#1C9B68</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="LoginSignUpBackGround">#EDEDED</color>
 </resources>

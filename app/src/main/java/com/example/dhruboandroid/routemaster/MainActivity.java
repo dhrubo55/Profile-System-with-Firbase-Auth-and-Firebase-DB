@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity
         nav_email = findViewById(R.id.nav_Email);
         nav_name = findViewById(R.id.nav_Name);
 
+
 //
 //        if (savedInstanceState == null) {
 //            Bundle extras = getIntent().getExtras();
@@ -186,6 +187,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
+            startActivity(new Intent(MainActivity.this, RouteInfo.class));
 
         } else if (id == R.id.nav_manage) {
 

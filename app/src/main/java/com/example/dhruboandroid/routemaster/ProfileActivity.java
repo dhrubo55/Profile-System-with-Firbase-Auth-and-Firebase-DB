@@ -63,7 +63,7 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageView profile_image;
     private Bitmap bitmap;
 
-    private String name;
+    //private String name;
 
     private static Context mContext;
     private String usrID;
@@ -103,6 +103,12 @@ public class ProfileActivity extends AppCompatActivity {
         firedbReference = firedbinstance.getReference("users");
         firedbinstance.getReference("app_title").setValue("RouteMaster");
 
+
+
+        profile_email.setText(firebaseAuth.getCurrentUser().getEmail());
+
+
+
         try {
             readData(usrID);
         } catch (NullPointerException e) {
@@ -125,7 +131,7 @@ public class ProfileActivity extends AppCompatActivity {
                 // enabling the GUI properties
                 profile_save.setVisibility(View.VISIBLE);
                 profile_edit.setVisibility(View.INVISIBLE);
-                profile_email.setEnabled(true);
+                profile_email.setEnabled(false);
                 profile_social.setEnabled(true);
                 profile_group.setEnabled(true);
                 profile_number.setEnabled(true);
@@ -215,8 +221,6 @@ public class ProfileActivity extends AppCompatActivity {
         String encodedImage = imageToString(bitmap);
         SharedPrefarences.setPreference(getContext(),FirebaseAuth.getInstance().getCurrentUser().getUid(),encodedImage);
     }
-
-
 
     // create user method for creating new user in the app and Firebase
     private void createUser(String n, String e, String id, String s, String g, String num){
@@ -334,6 +338,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         startActivity(new Intent(ProfileActivity.this, MainActivity.class));
+        finish();
     }
 }
 
