@@ -31,7 +31,9 @@
             android:name=".SignupActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".RouteInfo"></activity>
+        <activity android:name=".RouteInfo" />
+        <activity android:name=".ContactUs" />
+        <activity android:name=".AboutUs"></activity>
     </application>
 
 </manifest>
