@@ -9,11 +9,13 @@ public class userContactsInformation {
 
     public String comments;
     public String Id;
+    public boolean commentFlag;
 
-    public userContactsInformation(String comments, String id ) {
+    public userContactsInformation(String comments, String id, boolean commentFlag) {
 
         this.comments = comments;
         Id = id;
+        this.commentFlag = commentFlag;
     }
 
 

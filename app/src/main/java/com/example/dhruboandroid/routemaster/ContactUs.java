@@ -31,7 +31,7 @@ public class ContactUs extends AppCompatActivity {
     private FirebaseAuth firebaseAuth1;
     private FirebaseDatabase firedbinstance;
     private DatabaseReference firedbReference;
-    private DatabaseReference getFiredbReference;
+    private DatabaseReference firedbReference1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,54 +49,60 @@ public class ContactUs extends AppCompatActivity {
         id = firebaseAuth1.getCurrentUser().getUid();
 
 
-
-
         firedbinstance = FirebaseDatabase.getInstance();
         firedbReference = firedbinstance.getReference("users");
+        firedbReference1 = firedbinstance.getReference("comment");
+        Log.d(TAG,firedbReference1.toString());
         //getFiredbReference = firedbinstance.getReference("Contact Info");
-        firedbinstance.getReference("app_title").setValue("RouteMaster");
+        //firedbinstance.getReference("app_title").setValue("RouteMaster");
 
         name.setEnabled(false);
         email.setEnabled(false);
-        phone.setEnabled(false );
+        phone.setEnabled(false);
+
 
         firedbReference.child(id).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    userDataModelClass user = dataSnapshot.getValue(userDataModelClass.class);
-                    // fetching all the data
-                    // from firebase servers and placing them in UI
-                    if (user != null) {
-                        Log.d(TAG, "Social Media: " + user.social_media +
-                                "\n email " + user.user_email);
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                userDataModelClass user = dataSnapshot.getValue(userDataModelClass.class);
+                // fetching all the data
+                // from firebase servers and placing them in UI
+                if (user != null) {
+                    Log.d(TAG, "Social Media: " + user.social_media +
+                            "\n email " + user.user_email);
 
-                        name.setText(user.user_name);
-                        phone.setText(user.number);
-                    }
+                    name.setText(user.user_name);
+                    phone.setText(user.number);
                 }
+            }
 
-                @Override
-                public void onCancelled(DatabaseError error) {
-                    // Failed to read value
-                    Log.w(TAG, "Failed to read value.", error.toException());
-                }
-            });
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
 
         email.setText(firebaseAuth1.getCurrentUser().getEmail());
 
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        if (comments.getText().toString().isEmpty()) {
 
-                String n = name.getText().toString().trim();
-                String p = phone.getText().toString().trim();
-                String c = comments.getText().toString().trim();
-                String e = firebaseAuth1.getCurrentUser().getEmail();
-                createUser(c,id);
-            }
-        });
+        } else {
+            submit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
+                    String n = name.getText().toString().trim();
+                    String p = phone.getText().toString().trim();
+                    String c = comments.getText().toString().trim();
+                    String e = firebaseAuth1.getCurrentUser().getEmail();
+                    boolean flag = !c.isEmpty();
+                    createUser(c, id, flag);
+                }
+            });
+
+        }
     }
 
 
@@ -107,17 +113,18 @@ public class ContactUs extends AppCompatActivity {
 
 
     // create user method for creating new user in the app and Firebase
-    private void createUser(String c, String id){
+    private void createUser(String c, String id, boolean flag){
 
         // initializing the data model class of the userDataModel
-        userContactsInformation user = new userContactsInformation(c,id);
-        firedbReference.child(id).setValue(user);
+        userContactsInformation user = new userContactsInformation(c,id, flag);
+        firedbReference1.setValue(user);
+        Log.d(TAG,user.toString());
         addUserChangeLisener(id);
     }
 
     // user change listener for updating user information in the current user  (Without Login Out)
     private void addUserChangeLisener(String i) {
-        firedbReference.child(i).addValueEventListener(new ValueEventListener() {
+        firedbReference1.child(i).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 userContactsInformation user = dataSnapshot.getValue(userContactsInformation.class);
